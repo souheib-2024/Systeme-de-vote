@@ -1,0 +1,174 @@
+/*Barre de progression*/
+#progressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background: linear-gradient(90deg, #ff007a, #ff4800, #de006f);
+    z-index: 10000;
+    transition: width 0.2s ease-out, opacity 0.4s ease-in-out;
+    box-shadow: 0px 0px 10px rgba(255, 0, 122, 0.6);
+    border-radius: 2px;
+}
+
+body {
+    background-color: #f4f4f9;
+}
+
+.main {
+    margin-top: 15px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.voting_title {
+    font-size: 50px;
+    font-family: 'Playfair Display', serif !important;
+}
+
+.insert_title {
+    margin-top: 25px;
+    font-size: 20px;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.voting_input {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#inputValeur {
+    width: 40%;
+    padding: 9px;
+    border: 1px solid rgb(54, 54, 54);
+    border-radius: 8px;
+    transition: 0.1s;
+}
+
+#inputValeur:focus {
+    outline: none;
+    border: 1px solid rgb(37, 124, 229);
+    box-shadow: 0 0 7px rgba(52, 152, 219, 0.5);
+}
+
+#inputValeur:hover {
+    transform: scale(1.03);
+}
+
+.voting_input button {
+    margin-top: 0.5px;
+    width: 80px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    transition: 0.1s;
+    font-family: 'Poppins', sans-serif !important;
+    color: #fff;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+}
+
+.voting_input button:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to bottom, #2980b9, #1c6690);
+}
+
+/***********************************************************************
+-----------------------------TABLEAU------------------------------------
+***********************************************************************/
+
+.voting_table_container {
+    margin-top: 42px;
+    max-height: 379px;
+    overflow: auto;
+}
+
+#voting_table {
+    font-family: 'Montserrat', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    table-layout: fixed;
+    margin: auto;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.28);
+}
+
+#voting_table td:nth-child(3), #voting_table th:nth-child(3) {
+    width: 150px;
+    text-align: center;
+}
+
+#voting_table img {
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    max-width: 100px;
+    height: auto;
+}
+
+#voting_table td:nth-child(4), #voting_table th:nth-child(4) {
+    background-color: #e7e7e7;
+    text-align: center;
+    color: #fff;
+    width: 120px;
+}
+
+#voting_table td, #voting_table th {
+    border: 1px solid #a5b9ed;
+    padding: 8px;
+    width: 890px;
+    word-wrap: break-word;
+}
+
+/* Réduction de largeur */
+#voting_table td:nth-child(1), #voting_table th:nth-child(1) {
+    width: 200px;
+}
+.nextButton {
+    margin: 20px auto; /* Ajoute un espace au-dessus et centre horizontalement */
+    display: block; /* Force le centrage */
+    width: 200px;
+    padding: 12px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(to right, #28a745, #218838);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nextButton:hover {
+    background: linear-gradient(to right, #218838, #1e7e34);
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nextButton:active {
+    transform: scale(0.98);
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nextButton.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/***********************************************************************
+----------------------------------MOBILE--------------------------------
+***********************************************************************/
+
+@media (max-width: 768px) {
+    .voting_input {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,34 @@
+<header>
+    <link rel="stylesheet" href="/css/header.css">
+
+    <div class="container">
+        <!-- Logo -->
+        <a class="brand" href="/accueil">
+            <img src="/images/logo.jpg" alt="Logo" class="logo-icon">
+        </a>
+
+        <!-- Menu principal -->
+        <nav class="menu">
+            <ul>
+                <li><a href="/accueil">Accueil</a></li>
+                <li><a href="/liste_evenement">Liste évènements</a></li>
+                <li><a href="/Resultat">Résultats</a></li>
+                <li><a href="/parametre">Paramètres</a></li>
+            </ul>
+        </nav>
+
+        <!-- Compte avec icône admin -->
+        <div class="account">
+            <img src="/images/admin.png" class="admin-icon" />
+            <div class="dropdown-menu" id="dropdownMenu">
+                <div class="user-info">
+                    <div th:text="${prenom}"></div>
+                    <div th:text="${role}"></div>
+                </div>
+                <button class="logout-button">Se déconnecter</button> <!-- ✅ Bouton logout -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/header.js"></script>
+</header>

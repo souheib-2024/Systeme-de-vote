@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authentification</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Styles -->
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="progressBar"></div>
+
+    <div class="auth_container">
+        <!----------------------- Formulaire de connexion ----------------------->
+        <form id="loginForm" novalidate>
+            <div class="container">
+                <div class="adminIcone">
+                    <img th:src="@{/images/icon.png}" alt="Icone administrateur">
+                    <div class="adminTitle">ESPACE DE CONNEXION</div>
+                </div>
+
+                <br/>
+
+                <!-- Champs -->
+                <div class="input-container">
+                    <i class='bx bxs-user'></i>
+                    <input id="prenom" type="text" name="prenom" placeholder="Prénom *" required th:value="${prenom}">
+                </div>
+
+                <div class="input-container">
+                    <i class='bx bxs-lock-alt'></i>
+                    <input id="password" type="password" name="mp" placeholder="Mot de passe *" required>
+					
+                </div>
+                <i id="togglePassword" class='bx bx-toggle-left'></i>
+ 
+                <button type="submit" id="loginButton">
+                    Se connecter 
+                    <div class="loader"></div>
+                </button>
+
+                <!-- Message d'erreur côté client (géré par JS) -->
+                <p id="jsErrorMessage" class="error-message hidden"></p>
+            </div>
+        </form>
+
+        <script th:src="@{/js/login.js}"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+/****************** Header **********************/
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #4A90E2; /* Bleu vif */
+    padding: 25px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Logo */
+.brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    min-width: 120px;
+}
+
+.logo-icon {
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+    border-radius: 50%;
+    object-fit: cover; /* ✅ Évite les déformations */
+}
+
+/* Menu principal */
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.menu ul li a:hover {
+    color: #FFD700; /* Texte doré au survol */
+}
+
+.menu ul li a::after {
+    content: ''; /* Barre animée */
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #FFD700;
+    transition: width 0.3s ease;
+}
+
+.menu ul li a:hover::after {
+    width: 100%;
+}
+
+/* Zone compte */
+.account {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* ✅ Correction : afficher correctement le prénom et rôle */
+.user-info {
+    display: block !important; /* 🔥 Assure l'affichage */
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+/* Icône admin */
+.admin-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.admin-icon:hover {
+    transform: scale(1.1);
+}
+
+/* ✅ Correction : Affichage correct du menu déroulant */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    list-style: none;
+    padding: 12px 18px;
+    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    min-width: 160px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ✅ Ajout d'un style pour le bouton de déconnexion */
+.logout-button {
+    display: block;
+    width: 100%;
+    background-color: #D32F2F;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #B71C1C;
+}
+
+/* ✅ Version mobile */
+@media (max-width: 768px) {
+    .menu ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .account {
+        margin-top: 10px;
+    }
+}
