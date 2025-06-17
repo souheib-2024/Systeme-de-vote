@@ -1,0 +1,28 @@
+name: Build and Deploy Docker Container
+
+on:
+  push:
+    branches:
+      - main  # 🚀 Déclenchement automatique à chaque commit sur `main`
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code source
+        uses: actions/checkout@v3
+
+      - name: Build du projet (compilation du JAR)
+        run: mvn clean package  # 🔥 Compile l'application avant de créer l’image Docker
+
+      - name: Construire l’image Docker
+        run: docker build -t mon_app:latest .
+
+      - name: Enregistrer l’image Docker localement
+        run: docker save -o mon_app.tar mon_app:latest
+
+      - name: Transférer l’image vers Docker Desktop (via SSH ou accès local)
+        run: |
+          scp mon_app.tar user@docker-desktop:/home/user/mon_app.tar || true
+          ssh user@docker-desktop "docker load -i /home/user/mon_app.tar && docker stop mon_app || true && docker rm mon_app || true && docker run -d --name mon_app -p 8080:8080 mon_app:latest"
