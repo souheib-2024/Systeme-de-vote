@@ -22,7 +22,5 @@ jobs:
       - name: Enregistrer l’image Docker localement
         run: docker save -o mon_app.tar mon_app:latest
 
-      - name: Transférer l’image vers Docker Desktop (via SSH ou accès local)
-        run: |
-          scp mon_app.tar user@docker-desktop:/home/user/mon_app.tar || true
-          ssh user@docker-desktop "docker load -i /home/user/mon_app.tar && docker stop mon_app || true && docker rm mon_app || true && docker run -d --name mon_app -p 8080:8080 mon_app:latest"
+      - name: Charger l’image sur Docker Desktop
+        run:  docker load -i mon_app.tar
