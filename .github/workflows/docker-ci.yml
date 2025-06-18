@@ -16,14 +16,16 @@ jobs:
       - name: ⚙️ Build app with Maven
         run: mvn clean package -DskipTests
 
-      - name: 🔍 Vérifier que le secret est bien lu
-        run: echo "Longueur du token : $(echo '${{ secrets.DOCKER_HUB_TOKEN }}' | wc -c)"
+      - name: 🔍 Vérification du token (debug)
+        run: |
+          echo "Longueur du token : $(echo ${{ secrets.DOCKER_HUB_TOKEN }} | wc -c)"
 
-      - name: 🔐 Login to Docker Hub
-        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "souheib2000" --password-stdin
+      - name: 🔐 Login sécurisé à Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "souheib2000" --password-stdin
 
       - name: 🐳 Build Docker image
         run: docker build -t souheib2000/mon_app:latest .
 
-      - name: 📤 Push Docker image
+      - name: 📤 Push Docker image to Docker Hub
         run: docker push souheib2000/mon_app:latest
