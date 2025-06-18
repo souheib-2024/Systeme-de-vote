@@ -3,27 +3,24 @@ name: Build and Push Docker Image to Docker Hub
 on:
   push:
     branches:
-      - main  # Déclenche le workflow sur chaque push vers la branche main
+      - main
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🔄 Checkout source code
-        uses: actions/checkout@v3
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v4
 
-      - name: ⚙️ Build the JAR avec Maven
+      - name: ⚙️ Build app with Maven
         run: mvn clean package -DskipTests
 
-      - name: 🔐 Login to Docker Hub (via secrets sécurisés)
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
-        run: echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-
       - name: 🐳 Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/mon_app:latest .
+        run: docker build -t souheib2000/mon_app:latest .
 
-      - name: 📤 Push image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/mon_app:latest
+      - name: 🔐 Login to Docker Hub
+        run: docker login -u souheib2000 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: 📤 Push Docker image
+        run: docker push souheib2000/mon_app:latest
