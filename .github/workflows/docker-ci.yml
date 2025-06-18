@@ -19,13 +19,17 @@ jobs:
       - name: 🔍 DEBUG - Vérification des secrets
         run: |
           echo "DOCKER_USERNAME => '${{ secrets.DOCKER_USERNAME }}'"
-          echo "DOCKER_PASSWORD Length => $(echo '${{ secrets.DOCKER_PASSWORD }}' | wc -c)"
+          echo "DOCKER_PASSWORD Longueur => $(echo '${{ secrets.DOCKER_PASSWORD }}' | wc -c)"
 
       - name: 🔐 Login to Docker Hub
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
         run: |
+          if [ -z "$DOCKER_USER" ] || [ -z "$DOCKER_PASS" ]; then
+            echo "❌ ERREUR : Les secrets DOCKER_USERNAME ou DOCKER_PASSWORD sont vides !"
+            exit 1
+          fi
           echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 
       - name: 🐳 Build Docker image
