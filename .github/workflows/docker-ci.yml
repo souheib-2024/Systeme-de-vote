@@ -19,8 +19,8 @@ jobs:
       - name: 🐳 Build Docker image
         run: docker build -t souheib2000/mon_app:latest .
 
-      - name: 🔐 Login to Docker Hub
-        run: docker login -u souheib2000 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: 🔐 Login to Docker Hub (avec token sécurisé)
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u souheib2000 --password-stdin
 
       - name: 📤 Push Docker image
         run: docker push souheib2000/mon_app:latest
