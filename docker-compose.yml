@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  database:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: zaadyapp
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: adminpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  app:
+    image: souheib2000/mon_app:latest  # ✅ remplace `build: .` par ton image Docker Hub
+    container_name: spring-app
+    restart: always
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/zaadyapp
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: adminpassword
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge

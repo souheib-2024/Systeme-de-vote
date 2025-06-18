@@ -1,4 +1,4 @@
-name: Build and Deploy Docker Container
+name: Build and Push Docker Image to Docker Hub
 
 on:
   push:
@@ -6,21 +6,21 @@ on:
       - main  # 🚀 Déclenchement automatique à chaque commit sur `main`
 
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout du code source
+      - name: Checkout source code
         uses: actions/checkout@v3
 
-      - name: Build du projet (compilation du JAR)
-        run : mvn clean package -DskipTests  # 🔥 Compile l'application avant de créer l’image Docker
+      - name: Build the JAR with Maven
+        run: mvn clean package -DskipTests
 
-      - name: Construire l’image Docker
-        run: docker build -t mon_app:latest .
+      - name: Build Docker image (Docker Hub tag)
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/mon_app:latest .
 
-      - name: Enregistrer l’image Docker localement
-        run: docker save -o mon_app.tar mon_app:latest
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Charger l’image sur Docker Desktop
-        run:  docker load -i mon_app.tar
+      - name: Push image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/mon_app:latest
