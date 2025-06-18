@@ -10,22 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🧾 Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: ⚙️ Build app with Maven
+      - name: Build app with Maven
         run: mvn clean package -DskipTests
 
-      - name: 🔍 Vérification du token (debug)
-        run: |
-          echo "Longueur du token : $(echo ${{ secrets.DOCKER_HUB_TOKEN }} | wc -c)"
+      - name: Login to Docker Hub (secure)
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u souheib2000 --password-stdin
 
-      - name: 🔐 Connexion sécurisée à Docker Hub
-        run: |
-          echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u souheib2000 --password-stdin
-
-      - name: 🐳 Build Docker image
+      - name: Build Docker image
         run: docker build -t souheib2000/mon_app:latest .
 
-      - name: 📤 Push Docker image to Docker Hub
+      - name: Push Docker image
         run: docker push souheib2000/mon_app:latest
