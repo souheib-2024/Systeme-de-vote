@@ -14,9 +14,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.souheib.ZaadyApp.dto.EvenementDTO;
 import com.souheib.ZaadyApp.exception.EvenementNotFoundException;
 import com.souheib.ZaadyApp.model.Evenement;
+import com.souheib.ZaadyApp.model.Role;
 import com.souheib.ZaadyApp.model.Utilisateur;
 import com.souheib.ZaadyApp.repository.EvenementRepository;
 import com.souheib.ZaadyApp.service.EvenementService;
@@ -31,36 +34,37 @@ public class EvenementServiceTest {
     @Mock
     private EvenementRepository evenementRepository;
 
-   /*
 
+    @Mock
+    private BCryptPasswordEncoder passwordEncoder;
+    
+    
     // 🔹 Test : création d'un événement
     @Test
-    public void testCreateEvenement() {
-        Evenement evenement = new Evenement("Hackathon", "Un hackathon de 24h", LocalDate.now(), LocalDate.now().plusDays(1), new Utilisateur());
+    void creerEvenement_Succes() {
+        System.out.println("✅ TEST CRÉATION ÉVÉNEMENT");
+
+        // Simuler l'encodage du mot de passe pour l'utilisateur
+        when(passwordEncoder.encode("sousou")).thenReturn("motDePasseEncode");
+
+        Utilisateur utilisateur = new Utilisateur(null, "ismael ahmed", "souheib", "motDePasseEncode", Role.UTILISATEUR);
+        System.out.println("Utilisateur simulé : " + utilisateur.getPrenom() + ", role = " + utilisateur.getRole());
+
+        // Création d’un événement associé à l’utilisateur
+        Evenement evenement = new Evenement("Hackathon", "Un hackathon de 24h", LocalDate.now(), LocalDate.now().plusDays(1), utilisateur.getId());
+
+        // Simuler la sauvegarde en base
         when(evenementRepository.save(evenement)).thenReturn(evenement);
 
-        Evenement result = evenementService.creerEvenement(evenement);
+        // Appel de la méthode testée
+        evenementService.creerEvenement(evenement);
+        // Affichage du résultat
+        System.out.println("📦 Événement créé :");
+        System.out.println("Nom = " + evenement.getNom());
+        System.out.println("Description = " + evenement.getDescription());
+        System.out.println("Date = "+evenement.getDateDebut());
 
-        assertNotNull(result);
-        assertEquals("Hackathon", result.getNom());
     }
 
-    @Test
-    public void testUpdateEvenement() {
-        Evenement evenement = new Evenement("Ancien Nom", "Ancienne description", LocalDate.now(), LocalDate.now().plusDays(1), new Utilisateur());
-
-        when(evenementRepository.findById(1)).thenReturn(Optional.of(evenement));
-
-        Evenement updatedEvenement = new Evenement("Nouveau Nom", "Nouvelle description", LocalDate.now(), LocalDate.now().plusDays(2), new Utilisateur());
-        when(evenementRepository.save(any(Evenement.class))).thenReturn(updatedEvenement);
-
-        Evenement result = evenementService.modifierEvenement(1, updatedEvenement);
-
-        assertNotNull(result); // Vérifie que result n'est pas null avant d'accéder à ses propriétés
-        assertEquals("Nouveau Nom", result.getNom());
-        assertEquals("Nouvelle description", result.getDescription());
-    }
-
-*/
   
 }

@@ -6,11 +6,15 @@ import com.souheib.ZaadyApp.model.Role;
 import com.souheib.ZaadyApp.model.Utilisateur;
 import com.souheib.ZaadyApp.repository.EvenementRepository;
 import com.souheib.ZaadyApp.repository.UtilisateurRepository;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,9 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -41,51 +46,44 @@ public class EvenementIntegrationTest {
 
     private Utilisateur adminTest;
     private Utilisateur utilisateurTest;
-/*
+
     @BeforeEach
     public void initialiserDonnees() {
         evenementRepository.deleteAll();
         utilisateurRepository.deleteAll();
 
-        // 🔹 Création et enregistrement d'un ADMIN
+        System.out.println("🧹 Nettoyage des données de test");
+
+        // Création et enregistrement de l'ADMIN
         adminTest = new Utilisateur();
         adminTest.setNom("Admin");
         adminTest.setPrenom("Boss");
         adminTest.setMotDePasse("hashedPassword");
-        adminTest.setRole(Role.ADMIN); // ✅ Défini via l'énumération
+        adminTest.setRole(Role.ADMIN);
         adminTest = utilisateurRepository.save(adminTest);
+        System.out.println("👤 Admin enregistré : ID = " + adminTest.getId());
 
-        // 🔹 Création et enregistrement d'un UTILISATEUR
-        utilisateurTest = new Utilisateur();
-        utilisateurTest.setNom("Souheib");
-        utilisateurTest.setPrenom("User");
-        utilisateurTest.setMotDePasse("hashedPassword");
-        utilisateurTest.setRole(Role.UTILISATEUR); // ✅ Défini via l'énumération
-        utilisateurTest = utilisateurRepository.save(utilisateurTest);
     }
 
- // 🔹 **Test : Un ADMIN peut créer un événement**
     @Test
+    @DisplayName("🔐 ADMIN peut créer un événement")
     @WithMockUser(username = "admin", authorities = {"ROLE_ADMIN"})
     public void testAdminPeutCreerEvenement() throws Exception {
-        Evenement nouvelEvenement = new Evenement("Événement Admin", "Description test", LocalDate.now(), LocalDate.now().plusDays(3), adminTest);
+        Evenement nouvelEvenement = new Evenement(
+            "Événement Admin",
+            "Description test",
+            LocalDate.now(),
+            LocalDate.now().plusDays(3),
+            adminTest.getId()
+        );
 
-        mockMvc.perform(post("/evenements/creerEvenement") // ✅ Utilise la bonne URL
+        System.out.println("📤 Envoi de l’événement créé par ADMIN à l’API");
+
+        mockMvc.perform(post("/evenements/creerEvenement")
+                .sessionAttr("id", adminTest.getId()) // 🔥 ici on injecte l’ID attendu
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(nouvelEvenement)))
                 .andExpect(status().isOk());
     }
 
-    // 🔹 **Test : Un UTILISATEUR peut créer un événement**
-    @Test
-    @WithMockUser(username = "utilisateur", authorities = {"ROLE_UTILISATEUR"})
-    public void testUtilisateurPeutCreerEvenement() throws Exception {
-        Evenement nouvelEvenement = new Evenement("Événement Utilisateur", "Description test", LocalDate.now(), LocalDate.now().plusDays(3), utilisateurTest);
-
-        mockMvc.perform(post("/evenements/creerEvenement") // ✅ Utilise la bonne URL
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(nouvelEvenement)))
-                .andExpect(status().isOk());
-    }
-*/
 }

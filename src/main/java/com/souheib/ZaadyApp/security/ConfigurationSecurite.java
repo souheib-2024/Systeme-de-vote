@@ -39,7 +39,7 @@ public class ConfigurationSecurite {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/login", "/css/**", "/js/**", "/images/**", "/utilisateurs/authentifier").permitAll()
                 .requestMatchers("/accueil","/choixVote", "/evenements/creerEvenement").authenticated()
-                .requestMatchers("/evenements/{id}/modifier", "/evenements/{id}/supprimer").hasRole("ADMIN") // ROLE_ADMIN
+                .requestMatchers("/evenements/**").hasRole("ADMIN") // ROLE_ADMIN
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session

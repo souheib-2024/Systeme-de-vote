@@ -17,7 +17,7 @@ services:
       - app-network
 
   app:
-    image: souheib2000/mon_app:latest  # ✅ remplace `build: .` par ton image Docker Hub
+    image: souheib2000/mon_app:latest  
     container_name: spring-app
     restart: always
     depends_on:

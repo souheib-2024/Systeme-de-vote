@@ -28,12 +28,12 @@ public class EvenementController {
         return evenementService.obtenirTousLesEvenements();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/modifierEvenement/{id}")
     public Evenement modifierEvenement(@PathVariable Integer id, @RequestBody Evenement evenement) {
         return evenementService.modifierEvenement(id, evenement);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/supprimerEvenement/{id}")
     public ResponseEntity<?> supprimerEvenement(@PathVariable Integer id) {
         evenementService.supprimerEvenement(id);
         return ResponseEntity.ok().build();
