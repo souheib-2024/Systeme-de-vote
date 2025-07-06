@@ -1,52 +1,65 @@
-🗳️ Système de Vote via les Produits de Meta
+# 🗳️ Système de Vote via les Produits Meta
 
-Plateforme sécurisée de gestion de vote en temps réel, intégrée aux canaux de communication de Meta — **WhatsApp**, **Messenger** et **Instagram** *(Phase 1 centrée sur WhatsApp)*.
+Plateforme sécurisée de gestion de votes en temps réel, intégrée aux canaux de communication de Meta — **WhatsApp**, **Messenger**, et **Instagram**  
+*(Phase 1 centrée sur WhatsApp)*
 
-📌 Description
+---
 
-Ce système permet à des administrateurs de configurer des sessions de vote et d’en suivre les résultats en direct, tandis que les participants votent via WhatsApp. Le système garantit une expérience utilisateur fluide et une sécurité avancée des données.
+## 📌 Description
 
-🎯 Objectif
+Ce système permet aux administrateurs de configurer des sessions de vote et d’en suivre les résultats en direct, tandis que les participants votent facilement via WhatsApp.  
+Le système garantit une expérience utilisateur fluide et une sécurité avancée des données.
 
-Optimiser la gestion des votes lors d'événements grâce à un système **automatisé, sécurisé et multicanal.
+---
 
+## 🎯 Objectif
 
-🔍 Phase 1 – Focus sur WhatsApp
+Optimiser la gestion des votes lors d'événements grâce à un système **automatisé, sécurisé et multicanal**.
 
-🎛️ Fonctionnalités principales
+---
 
-🔐 Interface Administrateur
-- Connexion sécurisée via **Spring Security**
-- Gestion des événements, questions, et options de vote
-- Administration des utilisateurs et rôles
-- Visualisation en temps réel des résultats
+## 🔍 Phase 1 – Focus sur WhatsApp
 
-💬 Vote via WhatsApp
-- Envoi automatique des choix via l’API WhatsApp Cloud
-- Traitement des réponses des utilisateurs
-- Gestion des erreurs et confirmations automatiques
-- Vote limité à une fois par utilisateur
+### 🎛️ Fonctionnalités principales
 
-🧠 Traitement des données
-- Stockage des données avec **Spring Data JPA**, **Hibernate**
-- Cryptage et sécurisation des données utilisateurs
-- Base de données : **MariaDB** (prod), **H2** (test/dev)
-- Statistiques en temps réel
+#### 🔐 Interface Administrateur
+- Connexion sécurisée via **Spring Security**  
+- Gestion des événements, questions, et options de vote  
+- Administration des utilisateurs et rôles (ADMIN/USER)  
+- Visualisation en temps réel des résultats  
 
+#### 💬 Vote via WhatsApp
+- Envoi automatique des choix via l’**API WhatsApp Cloud**  
+- Traitement des réponses des utilisateurs  
+- Gestion des erreurs et confirmations automatiques  
+- Vote limité à une fois par utilisateur  
 
-🧱 Stack Technique
+#### 🧠 Traitement des données
+- Stockage sécurisé avec **Spring Data JPA** et **Hibernate**  
+- Cryptage des données utilisateurs  
+- Base de données : **MariaDB** (production) et **H2** (test / développement)  
+- Génération de statistiques en temps réel  
 
-| Catégorie         | Technologies utilisées                                       |
-|-------------------|--------------------------------------------------------------|
-|     Langage       | Java                                                         |
-|     Back-end      | Spring Boot, Spring MVC, Spring Security, RESTful API        |
-|     Front-end     | Thymeleaf                                                    |
-|     ORM / DB      | Spring Data JPA, Hibernate, MariaDB, H2                      |
-|     Sécurité      | Spring Security, Authentification par rôle (ADMIN/USER)      |
-|     Tests         | JUnit 5, Mockito                                             |
-| Conteneurisation  | Docker, Docker Compose, DockerHub                            |
-|     CI/CD         | GitHub Actions                                               |
+---
 
+## 🧱 Stack Technique
+
+| Catégorie         | Technologies utilisées                                      |
+|-------------------|-------------------------------------------------------------|
+| 💻 Langage        | Java                                                        |
+| ⚙️ Back-end       | Spring Boot, Spring MVC, Spring Security, RESTful API       |
+| 🎨 Front-end      | Thymeleaf                                                   |
+| 🗄️ ORM / BDD      | Spring Data JPA, Hibernate, MariaDB, H2                     |
+| 🔐 Sécurité       | Spring Security, Authentification par rôles (ADMIN/USER)    |
+| 🧪 Tests          | JUnit 5, Mockito                                            |
+| 🐳 Conteneurisation | Docker, Docker Compose, DockerHub                           |
+| 🚀 CI/CD          | GitHub Actions                                              |
+
+---
+
+## 📄 Licence
+
+```text
 MIT License
 
 Copyright (c) 2025 [Ton Nom]
@@ -68,4 +81,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
 SOFTWARE.
-
