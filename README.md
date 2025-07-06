@@ -62,7 +62,7 @@ Optimiser la gestion des votes lors d'événements grâce à un système **autom
 ```text
 MIT License
 
-Copyright (c) 2025 [Ton Nom]
+Copyright (c) 2025 [ISMAEL AHMED Souheib]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
